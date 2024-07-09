@@ -1,0 +1,83 @@
+
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<img src="/static/5.jpg" width="1200" height="200">
+<script language="javascript">
+function check(form)
+{
+	if(form.otp.value == "")
+	{
+		alert("Enter OTP Value")
+		return false;
+
+	}
+	else
+	{
+		return true;
+	}
+}
+function reg()
+{
+	alert("redirect")
+	location.ahref= "/register";
+}
+</script>
+
+
+
+<table width="20%" bgcolor="FFFFFF" align="left">
+<tr>
+<td><img src="/static/6.jpg" width="300" height="500"></td>
+
+</tr>
+</table>
+<table width="20%" bgcolor="FFFFFF" align="right">
+<tr>
+<td><img src="/static/7.png" width="300" height="500"></td>
+
+</tr>
+</table>
+<form action="/fpass1" method="POST">
+<table width="20%" bgcolor="FFFFFF" align="center">
+{%if results%}
+<h2><center><font color="#FFFFF" size=6>Secure Authentication</font></center></h2>
+
+<tr>
+<td colspan=2><center><font size=6><b>Forget PIN</b></font></center></td>
+</tr>
+
+<tr>
+<td>Client Id:</td>
+<td><input type="text" size=25 name="cid" value="{{ results[1] }}" readonly></td>
+</tr>
+
+
+<tr>
+<td>OTP:</td>
+<td><input type="text" size=25 name="otp" ></td>
+
+</tr>
+
+<tr>
+<td><input type="Reset" ></td>
+<td><input type="submit" onclick="return check(this.form)" value="Change PIN"></td>
+
+</tr>
+
+</table>
+</form>
+<form action="/registerpage" method="POST">
+<table width="20%" bgcolor="FFFFFF" align="center">
+<tr>
+<td><input type="submit" value="Register"></td>
+
+</tr>
+
+</table>
+{% endif %}
+</form>
+{% endif %}
+{% endblock %}

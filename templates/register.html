@@ -1,0 +1,149 @@
+
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<img src="/static/5.jpg" width="1150" height="200">
+<script language="javascript">
+function check(form)
+{
+	if(form.name.value == "" )
+	{
+		alert("Error Enter Name")
+		return false;
+
+	}
+	if(form.cid.value == "" )
+	{
+		alert("Error Enter Client ID")
+		return false;
+
+	}
+	if( form.rollnumber.value == "" || isNaN( form.rollnumber.value))
+    {
+        alert( "Please provide a Rollnumber No in the format Digit." );
+        return false;
+    }
+
+	if(form.pin.value == "" )
+	{
+		alert("Error Enter PIN Number")
+		return false;
+
+	}
+
+	if( form.pin.value == "" || isNaN( form.pin.value) || form.pin.value.length != 4 )
+    {
+        alert( "Please provide a PIN No in the format 123 and 4 Digit." );
+        return false;
+    }
+	var email = form.emailid.value;
+	atpos = email.indexOf("@");
+	dotpos = email.lastIndexOf(".");
+	if (email == "" || atpos < 1 || ( dotpos - atpos < 2 ))
+	{
+	    alert("Please enter correct email ID")
+	    return false;
+	}
+	if( form.mobile.value == "" || isNaN( form.mobile.value) || form.mobile.value.length != 10 )
+    {
+        alert( "Please provide a Mobile No in the format 123 and 10 Digit." );
+        return false;
+    }
+
+
+	else
+	{
+		return true;
+	}
+}
+
+function check1(form)
+{
+	if(form.cid.value == "")
+	{
+		alert("Error Enter Cliend Id")
+		return false;
+	}
+
+
+	else
+	{
+			return true;
+	}
+
+}
+
+
+</script>
+
+<table width="20%" bgcolor="FFFFFF" align="left">
+<tr>
+<td><img src="/static/6.jpg" width="300" height="500"></td>
+
+</tr>
+</table>
+<table width="20%" bgcolor="FFFFFF" align="right">
+<tr>
+<td><img src="/static/7.png" width="300" height="500"></td>
+
+</tr>
+</table>
+
+<form action="/register" method="POST">
+<table width="20%" bgcolor="FFFFFF" align="center">
+{%if message%}
+
+   <h4><center><font color="#FFFFF" size=4>{{ message}}</font></center></h4>
+{%endif%}
+<h2><center><font color="#FFFFF" size=6>Secure Authentication</font></center></h2>
+<tr>
+<td colspan=2><center><font size=6><b>Registration</b></font></center></td>
+</tr>
+<tr>
+<td>Name:</td>
+<td><input type="text" size=25 name="name"></td>
+</tr>
+<tr>
+<td>Cliend Id:</td>
+<td><input type="text" size=25 name="cid"></td>
+</tr>
+
+<tr>
+<td>Pin:</td>
+<td><input type="text" size=25 name="pin"></td>
+</tr>
+
+<tr>
+<td>Email ID:</td>
+<td><input type="text" size=25 name="emailid"></td>
+</tr>
+
+<tr>
+<td>Mobile No:</td>
+<td><input type="text" size=25 name="mobile"></td>
+</tr>
+
+
+<tr>
+<td><input type="Reset" ></td>
+<td><input type="submit" onclick="return check(this.form)" value="Register"></td>
+</tr><tr>
+<td><center><input type="submit" onclick="return check1(this.form)" value="Add Image" formaction="/StartCamera"></center></td>
+
+</tr>
+
+</table>
+</form>
+<form action="/loginpage" method="POST">
+<table width="20%" bgcolor="FFFFFF" align="center">
+
+
+<tr>
+<td><input type="submit" value="Login"></td>
+</tr>
+</table>
+</form>
+{% endif %}
+{% endblock %}
